@@ -1,6 +1,5 @@
 package at.bmlv.test.demo.dto;
 
-import at.bmlv.test.demo.domain.Person_Address;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -16,15 +15,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonDTO {
-    private UUID id;
+    private UUID uuid;
     @NotEmpty( message = "Vorname darf nicht leer sein" )
     @Size( max = 255 )
     private String firstName;
-    @NotEmpty( message = "Nach darf nicht leer sein" )
+    @NotEmpty( message = "Nachname darf nicht leer sein" )
     @Size( max = 255 )
     private String lastName;
     @Size( max = 1 )
     private Character gender;
-
-    private List<Person_Address> person_addressList;
+    @NotEmpty
+    private List<Person_AddressDTO> person_addressList;
 }

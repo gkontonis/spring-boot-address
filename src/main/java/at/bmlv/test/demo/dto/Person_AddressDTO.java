@@ -1,7 +1,5 @@
 package at.bmlv.test.demo.dto;
 
-import at.bmlv.test.demo.domain.Address;
-import at.bmlv.test.demo.domain.Person;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,8 +15,8 @@ public class Person_AddressDTO {
     private Long id;
     @NotEmpty( message = "Person darf nicht leer sein" )
     @Size( max = 255 )
-    private Person person;
+    private PersonDTO person;
     @NotEmpty( message = "Addresse darf nicht leer sein" )
     @Size( max = 255 )
-    private Address address;
+    private AddressDTO address;
 }

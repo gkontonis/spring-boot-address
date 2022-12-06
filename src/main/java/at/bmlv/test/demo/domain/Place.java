@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
-import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -23,11 +22,11 @@ public class Place {
     @SequenceGenerator(name = "place_gen", sequenceName = "place_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column( name = "ort", nullable = false )
+    @Column(name = "ort", nullable = false)
     private String placeName;
-    @Column( name = "bundesland", nullable = false )
+    @Column(name = "bundesland", nullable = false)
     private String state;
-    @Column( name = "postleitzahl", nullable = false)
+    @Column(name = "postleitzahl", nullable = false)
     private Integer postcode;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

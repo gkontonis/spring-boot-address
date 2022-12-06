@@ -13,7 +13,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity(name = "person_address")
 @Table(name = "person_address")
 public class Person_Address {

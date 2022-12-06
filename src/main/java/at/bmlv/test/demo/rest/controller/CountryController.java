@@ -3,6 +3,7 @@ package at.bmlv.test.demo.rest.controller;
 import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.mapper.CountryMapper;
 import at.bmlv.test.demo.rest.service.CountryService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class CountryController {
         return ResponseEntity.created(new URI(ENDPOINT)).body(countryService.create(countryDTO));
     }
 
+    @Transactional
     @PutMapping(value = "/country/{id}")
     public ResponseEntity<Void> updateCountry(@PathVariable Long id, @RequestBody CountryDTO countryDTO) {
         countryService.update(countryDTO);

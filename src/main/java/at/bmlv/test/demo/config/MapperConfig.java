@@ -22,8 +22,8 @@ public class MapperConfig {
     }
 
     @Bean
-    public PersonMapper createPersonMapper() {
-        return new PersonMapper();
+    public PersonMapper createPersonMapper(Person_AddressMapper mapper) {
+        return new PersonMapper(mapper);
     }
 
     @Bean
