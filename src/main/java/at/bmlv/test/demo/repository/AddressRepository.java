@@ -1,0 +1,27 @@
+package at.bmlv.test.demo.repository;
+
+import at.bmlv.test.demo.domain.Address;
+import at.bmlv.test.demo.domain.Country;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
+
+    @Query("select a from address a " +
+            "where lower(a.streetName) like lower(concat('%', :search,'%')) "
+            //"or lower(a.houseNumber) like lower(concat('%', :search,'%')) "
+            //"or str(a.flatNumber) like lower(concat('%', :search,'%')) "
+    )
+    List<Country> findBySearch(@Param("search") String search, Pageable page);
+
+    @Modifying
+    @Query("update address a set a.streetName = :streetName, a.houseNumber =:houseNumber, a.flatNumber=:flatNumber where a.id= :id")
+    void update(@Param("streetName") String streetName, @Param("houseNumber") Integer houseNumber, @Param("flatNumber") Integer flatNumber, @Param("id") Long id);
+}
