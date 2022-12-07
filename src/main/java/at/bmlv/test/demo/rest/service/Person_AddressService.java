@@ -20,11 +20,11 @@ public class Person_AddressService {
         this.person_addressMapper = personAddressMapper;
     }
 
-    //Updated not needed?
-
     public Person_AddressDTO create(Person_AddressDTO person_addressDTO) {
         return person_addressMapper.toDTO(person_addressRepository.save(person_addressMapper.toEntity(person_addressDTO)));
     }
+
+    //Updated not needed?
 
     public List<Person_AddressDTO> findAll(Pageable page) {
         return person_addressRepository.findAll().stream().map(person_addressMapper::toDTO).toList();

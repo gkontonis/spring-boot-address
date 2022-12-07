@@ -1,7 +1,6 @@
 package at.bmlv.test.demo.rest.controller;
 
 import at.bmlv.test.demo.dto.CountryDTO;
-import at.bmlv.test.demo.mapper.CountryMapper;
 import at.bmlv.test.demo.rest.service.CountryService;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +33,6 @@ public class CountryController {
         countryService.update(countryDTO);
         return ResponseEntity.ok().build();
     }
-
 
     @GetMapping(value = "/country")
     public ResponseEntity<List<CountryDTO>> findAllCountries(

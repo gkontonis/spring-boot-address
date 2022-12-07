@@ -1,6 +1,7 @@
 package at.bmlv.test.demo.rest.service;
 
 import at.bmlv.test.demo.domain.Place;
+import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.dto.PlaceDTO;
 import at.bmlv.test.demo.mapper.PlaceMapper;
 import at.bmlv.test.demo.repository.PlaceRepository;
@@ -22,6 +23,10 @@ public class PlaceService {
         this.placeMapper = placeMapper;
     }
 
+    public PlaceDTO create(PlaceDTO placeDTO) {
+        return placeMapper.toDTO(placeRepository.save(placeMapper.toEntity(placeDTO)));
+    }
+
     public void update(PlaceDTO placeDTO){
         Place place = placeMapper.toEntity(placeDTO);
         placeRepository.update(
@@ -32,7 +37,7 @@ public class PlaceService {
                 place.getId()
         );
     }
-    public List<PlaceDTO> findAll() {
+    public List<PlaceDTO> findAll(Pageable page) {
         return placeRepository.findAll().stream().map(placeMapper::toDTO).toList();
     }
 

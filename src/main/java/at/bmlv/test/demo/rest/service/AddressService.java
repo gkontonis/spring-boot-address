@@ -37,7 +37,7 @@ public class AddressService {
                 address.getId());
     }
 
-    public List<AddressDTO> findAll() {
+    public List<AddressDTO> findAll(Pageable page) {
         return addressRepository.findAll().stream().map(addressMapper::toDTO).toList();
     }
 
