@@ -19,7 +19,7 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
             "or lower(p.lastName) like lower(concat('%', :search,'%')) " +
             "or lower(p.gender) like lower(concat('%', :search,'%')) "
     )
-    List<Country> findBySearch(@Param("search") String search, Pageable page);
+    List<Person> findBySearch(@Param("search") String search, Pageable page);
 
     @Modifying
     @Query("update person p set p.firstName = :firstName, p.lastName = :lastName, p.gender= :gender where p.uuid= :id")

@@ -1,5 +1,6 @@
 package at.bmlv.test.demo.rest.service;
 
+import at.bmlv.test.demo.domain.Country;
 import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.mapper.CountryMapper;
 import at.bmlv.test.demo.repository.CountryRepository;
@@ -21,30 +22,30 @@ public class CountryService {
         this.countryMapper = countryMapper;
     }
 
-    public CountryDTO create( CountryDTO countryDTO ) {
-        return countryMapper.toDTO( countryRepository.save( countryMapper.toEntity( countryDTO ) ) );
+    public CountryDTO create(CountryDTO countryDTO) {
+        return countryMapper.toDTO(countryRepository.save(countryMapper.toEntity(countryDTO)));
     }
 
     public void update(CountryDTO countryDTO) {
+        Country country = countryMapper.toEntity(countryDTO);
         countryRepository.update(
-                countryDTO.getCountryName(),
-                countryDTO.getCountryNameAbbreviation(),
-                countryDTO.getId());
+                country.getCountryName(),
+                country.getCountryNameAbbreviation(),
+                country.getId());
     }
 
     public List<CountryDTO> findAll(Pageable page) {
-        return countryRepository
-                .findAll()
-                .stream()
-                .map(countryMapper::toDTO
-        ).toList();
+        return countryRepository.findAll().stream().map(countryMapper::toDTO).toList();
     }
-    public Optional<CountryDTO> findById(Long id ) {
-        return countryRepository.findById( id ).map( countryMapper::toDTO );
+
+    public Optional<CountryDTO> findById(Long id) {
+        return countryRepository.findById(id).map(countryMapper::toDTO);
     }
-    public List<CountryDTO> findBySearch( String search, Pageable page ) {
-        return countryRepository.findBySearch( search, page ).stream().map( countryMapper::toDTO ).toList();
+
+    public List<CountryDTO> findBySearch(String search, Pageable page) {
+        return countryRepository.findBySearch(search, page).stream().map(countryMapper::toDTO).toList();
     }
+
     public void deleteCountryByID(Long id) {
         countryRepository.deleteById(id);
     }

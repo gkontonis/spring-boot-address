@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface Person_AddressRepository extends JpaRepository<Person_Address, Long> {
-    /*@Query("select pa from person_address pa " +
+    @Query("select pa from person_address pa " +
             "where lower(pa.person) like lower(concat('%', :search,'%')) " +
             "or lower(pa.address) like lower(concat('%', :search,'%')) "
     )
-    List<Country> findBySearch(@Param("search") String search, Pageable page);
+    List<Person_Address> findBySearch(@Param("search") String search, Pageable page);
 
-    @Modifying
+    /*@Modifying
     @Query("update person_address pa set pa.person = :person, pa.address= :address where pa.id= :id")
     void update(@Param("placeName") String placeName, @Param("state") String state,@Param("postcode") Integer postcode, @Param("id") Long id);*/
 }

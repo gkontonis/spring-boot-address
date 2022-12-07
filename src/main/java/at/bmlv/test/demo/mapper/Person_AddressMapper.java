@@ -3,12 +3,13 @@ package at.bmlv.test.demo.mapper;
 import at.bmlv.test.demo.domain.Person_Address;
 import at.bmlv.test.demo.dto.Person_AddressDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class Person_AddressMapper implements EntityMapper<Person_AddressDTO, Person_Address> {
-    //todo add mapper
     private PersonMapper personMapper;
     private AddressMapper addressMapper;
 

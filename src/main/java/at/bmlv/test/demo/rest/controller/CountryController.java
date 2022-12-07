@@ -37,19 +37,19 @@ public class CountryController {
 
 
     @GetMapping(value = "/country")
-    public List<CountryDTO> findAllCountries(
+    public ResponseEntity<List<CountryDTO>> findAllCountries(
             @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "0", required = false) int page,
             @RequestParam(defaultValue = "50", required = false) int size
     ) {
-        if (search != null && !search.isBlank()){
-            return countryService.findBySearch(search, PageRequest.of(page, size));
+        if (search != null && !search.isBlank()) {
+            return ResponseEntity.ok(countryService.findBySearch(search, PageRequest.of(page, size)));
         }
-            return countryService.findAll(PageRequest.of(page, size));
+        return ResponseEntity.ok(countryService.findAll(PageRequest.of(page, size)));
     }
 
     @GetMapping(value = "/country/{id}")
-    public ResponseEntity<CountryDTO> findCountryById(@PathVariable Long id){
+    public ResponseEntity<CountryDTO> findCountryById(@PathVariable Long id) {
         return ResponseEntity.of(
                 countryService.findById(id)
         );

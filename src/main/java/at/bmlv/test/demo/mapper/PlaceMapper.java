@@ -2,10 +2,11 @@ package at.bmlv.test.demo.mapper;
 
 import at.bmlv.test.demo.domain.Place;
 import at.bmlv.test.demo.dto.PlaceDTO;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class PlaceMapper implements EntityMapper<PlaceDTO, Place> {
 
     private final CountryMapper countryMapper;

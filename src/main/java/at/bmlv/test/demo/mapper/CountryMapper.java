@@ -2,11 +2,11 @@ package at.bmlv.test.demo.mapper;
 
 import at.bmlv.test.demo.domain.Country;
 import at.bmlv.test.demo.dto.CountryDTO;
-import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class CountryMapper implements EntityMapper<CountryDTO, Country> {
 
     //CountryMapper countryMapper;

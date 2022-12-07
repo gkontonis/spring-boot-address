@@ -16,9 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressDTO {
+
+    //nur zum test
     private Long id;
     @NotEmpty(message = "Strassenname darf nicht leer sein") @Size(max = 255, message = "Street name must contain 1-255 character")
-    //nur zum test
     private String streetName;
     @NotEmpty(message = "Hausnummer darf nicht leer sein")
     @Size(max = 255)

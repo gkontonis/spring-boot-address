@@ -4,13 +4,24 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:8080/api/v1/country",
-    "url": "localhost:8080/api/v1/address",
+    "url": "localhost:8080/api/v1/country?page=0&size=50",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-12-01T14:42:15.175Z",
-    "modified": "2022-12-02T13:17:55.814Z",
+    "modified": "2022-12-07T12:09:37.690Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "size",
+        "value": "50",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

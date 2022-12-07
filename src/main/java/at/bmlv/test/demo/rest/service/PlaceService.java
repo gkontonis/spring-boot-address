@@ -1,23 +1,47 @@
 package at.bmlv.test.demo.rest.service;
 
+import at.bmlv.test.demo.domain.Place;
 import at.bmlv.test.demo.dto.PlaceDTO;
+import at.bmlv.test.demo.mapper.PlaceMapper;
 import at.bmlv.test.demo.repository.PlaceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlaceService {
     private final PlaceRepository placeRepository;
 
-    public PlaceService(PlaceRepository placeRepository) {this.placeRepository = placeRepository; }
+    private final PlaceMapper placeMapper;
 
-    public List<PlaceDTO> findAll(){
-        return placeRepository.findAll().stream().map(
-                entity -> new PlaceDTO(entity.getId(), entity.getPlaceName(), entity.getState(), entity.getPostcode())
-        ).toList();
+    public PlaceService(PlaceRepository placeRepository, PlaceMapper placeMapper) {
+        this.placeRepository = placeRepository;
+        this.placeMapper = placeMapper;
     }
 
+    public void update(PlaceDTO placeDTO){
+        Place place = placeMapper.toEntity(placeDTO);
+        placeRepository.update(
+                place.getPlaceName(),
+                place.getState(),
+                place.getPostcode(),
+                place.getCountry(),
+                place.getId()
+        );
+    }
+    public List<PlaceDTO> findAll() {
+        return placeRepository.findAll().stream().map(placeMapper::toDTO).toList();
+    }
+
+    public Optional<PlaceDTO> findById(Long id){
+        return placeRepository.findById(id).map(placeMapper::toDTO);
+    }
+    public List<PlaceDTO> findBySearch(String search, Pageable page){
+        return placeRepository.findBySearch(search, page).stream().map(placeMapper::toDTO).toList();
+    }
     public void deletePlaceByID(Long id) {
         placeRepository.deleteById(id);
     }

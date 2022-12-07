@@ -2,17 +2,21 @@ package at.bmlv.test.demo.mapper;
 
 import at.bmlv.test.demo.domain.Person;
 import at.bmlv.test.demo.dto.PersonDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PersonMapper implements EntityMapper<PersonDTO, Person> {
-    private final Person_AddressMapper personAddressMapper;
+    private  Person_AddressMapper personAddressMapper;
 
-    public PersonMapper(Person_AddressMapper personAddressMapper) {
+    @Autowired
+    public PersonMapper(@Lazy Person_AddressMapper personAddressMapper) {
         this.personAddressMapper = personAddressMapper;
     }
-
 
     @Override
     public Person toEntity(PersonDTO dto) {
@@ -41,4 +45,6 @@ public class PersonMapper implements EntityMapper<PersonDTO, Person> {
         }
         return personList;
     }
+
+
 }
