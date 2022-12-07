@@ -3,6 +3,7 @@ package at.bmlv.test.demo.mapper;
 import at.bmlv.test.demo.domain.Place;
 import at.bmlv.test.demo.dto.PlaceDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceMapper implements EntityMapper<PlaceDTO, Place> {
@@ -20,16 +21,21 @@ public class PlaceMapper implements EntityMapper<PlaceDTO, Place> {
 
     @Override
     public PlaceDTO toDTO(Place entity) {
-        return null;
+        return new PlaceDTO(entity.getId(), entity.getPlaceName(), entity.getState(), entity.getPostcode(), countryMapper.toDTO(entity.getCountry()));
     }
 
     @Override
     public List<PlaceDTO> toDTOList(List<Place> entities) {
-        return null;
+        List<PlaceDTO> dtoList = new ArrayList<>();
+        for (Place p : entities) {
+            dtoList.add(toDTO(p));
+        }
+        return dtoList;
     }
 
     @Override
     public List<Place> toEntityList(List<PlaceDTO> dtoList) {
-        return null;
+        List<Place> entityList = new ArrayList<>();
+        return entityList;
     }
 }
