@@ -23,9 +23,9 @@ public class Country {
     @SequenceGenerator(name = "country_gen", sequenceName = "country_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "land", nullable = false)
+    @Column(name = "land", nullable = false, unique = true)
     private String countryName;
-    @Column(name = "landabkürzung", nullable = false)
+    @Column(name = "landabkürzung", nullable = false, unique = true)
     private String countryNameAbbreviation;
 
 

@@ -26,7 +26,10 @@ import java.util.UUID;
 public class Person {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator", parameters = {@Parameter(name = "uuid_gen_strategy_class", value = "org.hibernate.id.uuid.CustomVersionOneStrategy")})
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {@Parameter(name = "uuid_gen_strategy_class",value = "org.hibernate.id.uuid.CustomVersionOneStrategy")})
     @Column(name = "id", columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID uuid;
     @Column(name = "vorname", nullable = false)

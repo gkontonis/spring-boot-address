@@ -27,9 +27,9 @@ public class AddressDTO {
     @NotEmpty(message = "Tuernummer darf nicht leer sein")
     @Size(max = 255)
     private Integer flatNumber;
-    @NotEmpty
+
     private Place place;
-    @NotEmpty
+
     private List<Person_AddressDTO> person_addressList;
 
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class PlaceMapper implements EntityMapper<PlaceDTO, Place> {
 
@@ -17,16 +18,26 @@ public class PlaceMapper implements EntityMapper<PlaceDTO, Place> {
 
     @Override
     public Place toEntity(PlaceDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return new Place(dto.getId(), dto.getPlaceName(), dto.getState(), dto.getPostcode(), countryMapper.toEntity(dto.getCountry()));
     }
 
     @Override
     public PlaceDTO toDTO(Place entity) {
+        if (entity == null) {
+            return null;
+        }
         return new PlaceDTO(entity.getId(), entity.getPlaceName(), entity.getState(), entity.getPostcode(), countryMapper.toDTO(entity.getCountry()));
     }
 
     @Override
     public List<PlaceDTO> toDTOList(List<Place> entities) {
+        if (entities == null) {
+            return List.of();
+        }
+
         List<PlaceDTO> dtoList = new ArrayList<>();
         for (Place p : entities) {
             dtoList.add(toDTO(p));
@@ -36,6 +47,9 @@ public class PlaceMapper implements EntityMapper<PlaceDTO, Place> {
 
     @Override
     public List<Place> toEntityList(List<PlaceDTO> dtoList) {
+        if (dtoList == null) {
+            return List.of();
+        }
         List<Place> entityList = new ArrayList<>();
         return entityList;
     }

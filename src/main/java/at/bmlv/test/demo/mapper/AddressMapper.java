@@ -21,16 +21,25 @@ public class AddressMapper implements EntityMapper<AddressDTO, Address> {
 
     @Override
     public Address toEntity(AddressDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return new Address(dto.getId(), dto.getStreetName(), dto.getHouseNumber(), dto.getFlatNumber(), dto.getPlace(), personAddressMapper.toEntityList(dto.getPerson_addressList()));
     }
 
     @Override
     public AddressDTO toDTO(Address entity) {
+        if (entity == null) {
+            return null;
+        }
         return new AddressDTO(entity.getId(), entity.getStreetName(), entity.getHouseNumber(), entity.getFlatNumber(), entity.getPlace(), personAddressMapper.toDTOList(entity.getPerson_addressList()));
     }
 
     @Override
     public List<AddressDTO> toDTOList(List<Address> entities) {
+        if (entities == null) {
+            return List.of();
+        }
         List<AddressDTO> dtoList = new ArrayList<>();
         for (Address a : entities) {
             dtoList.add(toDTO(a));
@@ -40,6 +49,9 @@ public class AddressMapper implements EntityMapper<AddressDTO, Address> {
 
     @Override
     public List<Address> toEntityList(List<AddressDTO> dtoList) {
+        if (dtoList == null) {
+            return List.of();
+        }
         List<Address> entityList = new ArrayList<>();
         for (AddressDTO a : dtoList) {
             entityList.add(toEntity(a));

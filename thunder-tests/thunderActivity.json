@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:8080/api/v1/country",
-    "url": "localhost:8080/api/v1/country?page=0&size=50",
+    "url": "localhost:8080/api/v1/address?page=0&size=20",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-12-01T14:42:15.175Z",
-    "modified": "2022-12-07T12:09:37.690Z",
+    "modified": "2022-12-07T14:34:02.586Z",
     "headers": [],
     "params": [
       {
@@ -18,10 +18,29 @@
       },
       {
         "name": "size",
-        "value": "50",
+        "value": "20",
         "isPath": false
       }
     ],
+    "tests": []
+  },
+  {
+    "_id": "abd39338-a081-4728-9a90-24ff65ca053e",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:8080/api/v1/person",
+    "url": "localhost:8080/api/v1/person",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-12-09T08:08:23.416Z",
+    "modified": "2022-12-09T08:08:31.615Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\r\n  \"firstName\": \"Georg\",\r\n  \"lastName\": \"Kontonis\",\r\n  \"gender\": \"M\",\r\n  \"person_addressList\": []\r\n}",
+      "form": []
+    },
     "tests": []
   }
 ]
