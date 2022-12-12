@@ -1,6 +1,5 @@
 package at.bmlv.test.demo.config;
 
-import at.bmlv.test.demo.repository.CountryRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
