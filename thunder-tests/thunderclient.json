@@ -401,5 +401,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "fc296f87-16cf-42c5-92c3-60b5f1808d9e",
+    "colId": "2a949526-cc68-472b-b2e5-064d2d8c3ee9",
+    "containerId": "3486d75b-a6af-4108-b273-763e0e902bd8",
+    "name": "localhost:8080/api/v1/person delete",
+    "url": "localhost:8080/api/v1/person/5",
+    "method": "DELETE",
+    "sortNum": 140000,
+    "created": "2022-12-12T11:17:00.004Z",
+    "modified": "2022-12-12T11:19:38.298Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

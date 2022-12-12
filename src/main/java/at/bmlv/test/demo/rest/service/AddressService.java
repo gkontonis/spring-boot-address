@@ -5,6 +5,7 @@ import at.bmlv.test.demo.dto.AddressDTO;
 import at.bmlv.test.demo.mapper.AddressMapper;
 import at.bmlv.test.demo.mapper.Person_AddressMapper;
 import at.bmlv.test.demo.repository.AddressRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class AddressService {
     public AddressDTO create(AddressDTO addressDTO) {
         return addressMapper.toDTO(addressRepository.save(addressMapper.toEntity(addressDTO)));
     }
-
+    @Transactional
     public void update(AddressDTO addressDTO) {
         Address address = addressMapper.toEntity(addressDTO);
         addressRepository.update(
@@ -33,7 +34,6 @@ public class AddressService {
                 address.getHouseNumber(),
                 address.getFlatNumber(),
                 address.getPlace(),
-                address.getPerson_addressList(),
                 address.getId());
     }
 
@@ -48,7 +48,7 @@ public class AddressService {
     public List<AddressDTO> findBySearch(String search, Pageable page) {
         return addressRepository.findBySearch(search, page).stream().map(addressMapper::toDTO).toList();
     }
-
+    @Transactional
     public void deleteByAddressID(Long id) {
         addressRepository.deleteById(id);
     }

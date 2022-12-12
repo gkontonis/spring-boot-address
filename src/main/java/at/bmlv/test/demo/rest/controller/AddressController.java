@@ -21,7 +21,7 @@ public class AddressController {
     public AddressController(AddressService addressService) {
         this.addressService = addressService;
     }
-
+    @Transactional
     @PostMapping(value = "/address")
     public ResponseEntity<AddressDTO> createAddress(@RequestBody AddressDTO addressDTO) throws URISyntaxException{
         return ResponseEntity.created(new URI(ENDPOINT)).body(addressService.create(addressDTO));
@@ -49,7 +49,7 @@ public class AddressController {
     public ResponseEntity<AddressDTO> findAddressById(@PathVariable Long id) {
         return ResponseEntity.of(addressService.findById(id));
     }
-
+    @Transactional
     @DeleteMapping(value = "/address/{id}")
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id) {
         addressService.deleteByAddressID(id);

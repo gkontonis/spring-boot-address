@@ -5,6 +5,7 @@ import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.dto.PlaceDTO;
 import at.bmlv.test.demo.mapper.PlaceMapper;
 import at.bmlv.test.demo.repository.PlaceRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,11 @@ public class PlaceService {
         this.placeRepository = placeRepository;
         this.placeMapper = placeMapper;
     }
-
+    @Transactional
     public PlaceDTO create(PlaceDTO placeDTO) {
         return placeMapper.toDTO(placeRepository.save(placeMapper.toEntity(placeDTO)));
     }
-
+    @Transactional
     public void update(PlaceDTO placeDTO){
         Place place = placeMapper.toEntity(placeDTO);
         placeRepository.update(
@@ -47,6 +48,7 @@ public class PlaceService {
     public List<PlaceDTO> findBySearch(String search, Pageable page){
         return placeRepository.findBySearch(search, page).stream().map(placeMapper::toDTO).toList();
     }
+    @Transactional
     public void deletePlaceByID(Long id) {
         placeRepository.deleteById(id);
     }

@@ -21,7 +21,7 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
-
+    @Transactional
     @PostMapping(value = "/person")
     public ResponseEntity<PersonDTO> createPerson(@RequestBody PersonDTO personDTO) throws URISyntaxException {
         return ResponseEntity.created(new URI(ENDPOINT)).body(personService.create(personDTO));
@@ -52,7 +52,7 @@ public class PersonController {
                 personService.findById(id)
         );
     }
-
+    @Transactional
     @DeleteMapping(value = "/person/{uuid}")//uuid großklein wichtig?
     public ResponseEntity<Void> deletePerson(@PathVariable UUID uuid) {
         personService.deletePersonByUUID(uuid);

@@ -2,6 +2,7 @@ package at.bmlv.test.demo.rest.controller;
 
 import at.bmlv.test.demo.dto.Person_AddressDTO;
 import at.bmlv.test.demo.rest.service.Person_AddressService;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class Person_AddressController {
     public Person_AddressController(Person_AddressService personAddressService) {
         person_addressService = personAddressService;
     }
-
+    @Transactional
     @PostMapping(value = "/person_address")
     public ResponseEntity<Person_AddressDTO> createPerson_Address(@RequestBody Person_AddressDTO person_addressDTO) throws URISyntaxException {
         return ResponseEntity.created(new URI(ENDPOINT)).body(person_addressService.create(person_addressDTO));
@@ -50,7 +51,7 @@ public class Person_AddressController {
                 person_addressService.findById(id)
         );
     }
-
+    @Transactional
     @DeleteMapping(value = "/person_address/{id}")
     public ResponseEntity<Void> deletePerson_Address(@PathVariable Long id) {
         person_addressService.deletePerson_AddressByID(id);

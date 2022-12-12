@@ -4,6 +4,7 @@ import at.bmlv.test.demo.domain.Country;
 import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.mapper.CountryMapper;
 import at.bmlv.test.demo.repository.CountryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +22,11 @@ public class CountryService {
         this.countryRepository = countryRepository;
         this.countryMapper = countryMapper;
     }
-
+    @Transactional
     public CountryDTO create(CountryDTO countryDTO) {
         return countryMapper.toDTO(countryRepository.save(countryMapper.toEntity(countryDTO)));
     }
-
+    @Transactional
     public void update(CountryDTO countryDTO) {
         Country country = countryMapper.toEntity(countryDTO);
         countryRepository.update(
@@ -45,7 +46,7 @@ public class CountryService {
     public List<CountryDTO> findBySearch(String search, Pageable page) {
         return countryRepository.findBySearch(search, page).stream().map(countryMapper::toDTO).toList();
     }
-
+    @Transactional
     public void deleteCountryByID(Long id) {
         countryRepository.deleteById(id);
     }

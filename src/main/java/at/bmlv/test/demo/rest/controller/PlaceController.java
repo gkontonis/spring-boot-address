@@ -20,7 +20,7 @@ public class PlaceController {
     public PlaceController(PlaceService placeService) {
         this.placeService = placeService;
     }
-
+    @Transactional
     @PostMapping(value = "/place")
     public ResponseEntity<PlaceDTO> createPlace(@RequestBody PlaceDTO placeDTO) throws URISyntaxException {
         return ResponseEntity.created(new URI(ENDPOINT)).body(placeService.create(placeDTO));
@@ -52,7 +52,7 @@ public class PlaceController {
                 placeService.findById(id)
         );
     }
-
+    @Transactional
     @DeleteMapping(value = "/place/{id}")
     public ResponseEntity<Void> deletePlace(@PathVariable Long id) {
         placeService.deletePlaceByID(id);

@@ -5,6 +5,7 @@ import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.dto.PersonDTO;
 import at.bmlv.test.demo.mapper.PersonMapper;
 import at.bmlv.test.demo.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +23,12 @@ public class PersonService {
         this.personMapper = personMapper;
     }
 
+    @Transactional
     public PersonDTO create(PersonDTO personDTO) {
         return personMapper.toDTO(personRepository.save(personMapper.toEntity(personDTO)));
     }
 
+    @Transactional
     public void update(PersonDTO personDTO) {
         Person person = personMapper.toEntity(personDTO);
         personRepository.update(
@@ -48,6 +51,7 @@ public class PersonService {
         return personRepository.findBySearch(search, page).stream().map(personMapper::toDTO).toList();
     }
 
+    @Transactional
     public void deletePersonByUUID(UUID uuid) {
         personRepository.deleteById(uuid);
     }

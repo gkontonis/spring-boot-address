@@ -23,11 +23,10 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     List<Address> findBySearch(@Param("search") String search, Pageable page);
 
     @Modifying
-    @Query("update address a set a.streetName = :streetName, a.houseNumber =:houseNumber, a.flatNumber=:flatNumber, a.place=:place, a.person_addressList=:person_AddressList where a.id= :id")
+    @Query("update address a set a.streetName = :streetName, a.houseNumber =:houseNumber, a.flatNumber=:flatNumber, a.place=:place where a.id= :id")
     void update(@Param("streetName") String streetName,
                 @Param("houseNumber") Integer houseNumber,
                 @Param("flatNumber") Integer flatNumber,
                 @Param("place") Place place,
-                @Param("person_AddressList") List<Person_Address> person_addressList,
                 @Param("id") Long id);
 }

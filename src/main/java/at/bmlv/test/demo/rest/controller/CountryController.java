@@ -22,6 +22,7 @@ public class CountryController {
         this.countryService = countryService;
     }
 
+    @Transactional
     @PostMapping(value = "/country")
     public ResponseEntity<CountryDTO> createCountry(@RequestBody CountryDTO countryDTO) throws URISyntaxException {
         return ResponseEntity.created(new URI(ENDPOINT)).body(countryService.create(countryDTO));
@@ -46,13 +47,14 @@ public class CountryController {
         return ResponseEntity.ok(countryService.findAll(PageRequest.of(page, size)));
     }
 
+
     @GetMapping(value = "/country/{id}")
     public ResponseEntity<CountryDTO> findCountryById(@PathVariable Long id) {
         return ResponseEntity.of(
                 countryService.findById(id)
         );
     }
-
+    @Transactional
     @DeleteMapping(value = "/country/{id}")
     public ResponseEntity<Void> deleteCountry(@PathVariable Long id) {
         countryService.deleteCountryByID(id);

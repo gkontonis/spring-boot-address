@@ -23,6 +23,9 @@ public interface PersonRepository extends JpaRepository<Person, UUID> {
 
     @Modifying
     @Query("update person p set p.firstName = :firstName, p.lastName = :lastName, p.gender= :gender where p.uuid= :id")
-    void update(@Param("firstName") String firstName, @Param("lastName") String lastName, @Param("gender") Character gender, @Param("id") UUID id);
+    void update(@Param("firstName") String firstName,
+                @Param("lastName") String lastName,
+                @Param("gender") Character gender,
+                @Param("id") UUID id);
 
 }
