@@ -15,18 +15,12 @@ public class Person_AddressMapper implements EntityMapper<Person_AddressDTO, Per
 
     @Override
     public Person_Address toEntity(Person_AddressDTO dto) {
-        if (dto == null) {
-            return null;
-        }
-        return new Person_Address(dto.getId(), personMapper.toEntity(dto.getPerson()), addressMapper.toEntity(dto.getAddress()));
+        return new Person_Address(dto.getId(), personMapper.toEntityWithOutPerson_Address(dto.getPerson()), addressMapper.toEntityWithoutPerson_Address(dto.getAddress()));
     }
 
     @Override
     public Person_AddressDTO toDTO(Person_Address entity) {
-        if (entity == null) {
-            return null;
-        }
-        return new Person_AddressDTO(entity.getId(), personMapper.toDTO(entity.getPerson()), addressMapper.toDTO(entity.getAddress()));
+        return new Person_AddressDTO(entity.getId(), personMapper.toDTOWithOutPerson_Address(entity.getPerson()), addressMapper.toDTOWithoutPerson_Address(entity.getAddress()));
     }
 
     @Override
@@ -55,6 +49,91 @@ public class Person_AddressMapper implements EntityMapper<Person_AddressDTO, Per
         return person_addressList;
     }
 
+    //------------------------------------------------------------
+    //Person
+    //------------------------------------------------------------
+
+    public Person_Address toEntityWithPerson(Person_AddressDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+        return new Person_Address(dto.getId(), personMapper.toEntityWithOutPerson_Address(dto.getPerson()), null);
+    }
+
+    public Person_AddressDTO toDTOWithPerson(Person_Address entity) {
+        if (entity == null) {
+            return null;
+        }
+        return new Person_AddressDTO(entity.getId(), personMapper.toDTOWithOutPerson_Address(entity.getPerson()), null);
+    }
+
+    public List<Person_Address> toEntityWithPersonList(List<Person_AddressDTO> dtoList) {
+        if (dtoList == null) {
+            return List.of();
+        }
+
+        List<Person_Address> person_addressList = new ArrayList<>();
+        for (Person_AddressDTO person_addressDTO : dtoList) {
+            person_addressList.add(toEntityWithPerson(person_addressDTO));
+        }
+        return person_addressList;
+    }
+
+
+    public List<Person_AddressDTO> toDTOWithPersonList(List<Person_Address> entities) {
+        if (entities == null) {
+            return List.of();
+        }
+
+        List<Person_AddressDTO> dtoList = new ArrayList<>();
+        for (Person_Address pa : entities) {
+            dtoList.add(toDTOWithPerson(pa));
+        }
+        return dtoList;
+    }
+
+    //------------------------------------------------------------
+    //Address
+    //------------------------------------------------------------
+    public Person_Address toEntityWithAddress(Person_AddressDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+        return new Person_Address(dto.getId(), null, addressMapper.toEntityWithoutPerson_Address(dto.getAddress()));
+    }
+
+    public Person_AddressDTO toDTOWithAddress(Person_Address entity) {
+        if (entity == null) {
+            return null;
+        }
+        return new Person_AddressDTO(entity.getId(), null, addressMapper.toDTOWithoutPerson_Address(entity.getAddress()));
+    }
+
+    public List<Person_Address> toEntityWithAddressList(List<Person_AddressDTO> dtoList) {
+        if (dtoList == null) {
+            return List.of();
+        }
+        List<Person_Address> person_addressList = new ArrayList<>();
+        for (Person_AddressDTO person_addressDTO : dtoList) {
+            person_addressList.add(toEntityWithAddress(person_addressDTO));
+        }
+        return person_addressList;
+    }
+
+    public List<Person_AddressDTO> toDTOWithAddressList(List<Person_Address> entities) {
+        if (entities == null) {
+            return List.of();
+        }
+        List<Person_AddressDTO> dtoList = new ArrayList<>();
+        for (Person_Address pa : entities) {
+            dtoList.add(toDTOWithAddress(pa));
+        }
+        return dtoList;
+    }
+
+    //------------------------------------------------------------
+    //Getter setter
+    //------------------------------------------------------------
     public PersonMapper getPersonMapper() {
         return personMapper;
     }
@@ -72,4 +151,6 @@ public class Person_AddressMapper implements EntityMapper<Person_AddressDTO, Per
     public void setAddressMapper(AddressMapper addressMapper) {
         this.addressMapper = addressMapper;
     }
+
+
 }

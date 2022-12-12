@@ -18,7 +18,7 @@ public class PersonDTO {
     @NotEmpty( message = "Nachname darf nicht leer sein" )
     @Size( max = 255 )
     private String lastName;
-    @Size( max = 1 )
+    @Size( max = 1 , message = "Max 1 Zeichen")
     private Character gender;
 
     private List<Person_AddressDTO> person_addressList;
