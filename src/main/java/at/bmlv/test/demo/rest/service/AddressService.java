@@ -23,6 +23,7 @@ public class AddressService {
         this.addressMapper = addressMapper;
     }
 
+    @Transactional
     public AddressDTO create(AddressDTO addressDTO) {
         return addressMapper.toDTO(addressRepository.save(addressMapper.toEntity(addressDTO)));
     }

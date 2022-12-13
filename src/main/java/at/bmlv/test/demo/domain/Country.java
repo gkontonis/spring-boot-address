@@ -1,6 +1,5 @@
 package at.bmlv.test.demo.domain;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +26,6 @@ public class Country {
     private String countryName;
     @Column(name = "landabkürzung", nullable = false, unique = true)
     private String countryNameAbbreviation;
-
 
     @Override
     public boolean equals(Object o) {

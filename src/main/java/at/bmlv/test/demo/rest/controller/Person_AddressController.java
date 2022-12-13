@@ -1,7 +1,9 @@
 package at.bmlv.test.demo.rest.controller;
 
 import at.bmlv.test.demo.dto.Person_AddressDTO;
+import at.bmlv.test.demo.dto.IdDTO;
 import at.bmlv.test.demo.rest.service.Person_AddressService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@Tag(name= "person-address-controller")
 public class Person_AddressController {
 
     private static final String ENDPOINT = "/person_address";
@@ -21,36 +24,40 @@ public class Person_AddressController {
     public Person_AddressController(Person_AddressService personAddressService) {
         person_addressService = personAddressService;
     }
+
     @Transactional
     @PostMapping(value = "/person_address")
-    public ResponseEntity<Person_AddressDTO> createPerson_Address(@RequestBody Person_AddressDTO person_addressDTO) throws URISyntaxException {
-        return ResponseEntity.created(new URI(ENDPOINT)).body(person_addressService.create(person_addressDTO));
-    }
-   /* @Transactional
-    @PutMapping(value = "/person_address/{id}")
-    public ResponseEntity<Void> updateperson_address(@PathVariable Long id, @RequestBody Person_AddressDTO person_addressDTO) {
-        person_addressService.update(person_addressDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Person_AddressDTO> createPerson_Address(@RequestBody IdDTO id) throws URISyntaxException {
+        return ResponseEntity.created(new URI(ENDPOINT)).body(person_addressService.create(id.getId(), id.getUuid()));
     }
 
-    not needed?*/
-   @GetMapping(value = "/person_address")
-   public ResponseEntity<List<Person_AddressDTO>> findAllPerson_Address(
-           @RequestParam(required = false) String search,
-           @RequestParam(defaultValue = "0", required = false) int page,
-           @RequestParam(defaultValue = "50", required = false) int size
-   ) {
-       if (search != null && !search.isBlank()) {
-           return ResponseEntity.ok(person_addressService.findBySearch(search, PageRequest.of(page, size)));
-       }
-       return ResponseEntity.ok(person_addressService.findAll(PageRequest.of(page, size)));
-   }
+    /* @Transactional
+     @PutMapping(value = "/person_address/{id}")
+     public ResponseEntity<Void> updateperson_address(@PathVariable Long id, @RequestBody Person_AddressDTO person_addressDTO) {
+         person_addressService.update(person_addressDTO);
+         return ResponseEntity.ok().build();
+     }
+
+     not needed?*/
+    @GetMapping(value = "/person_address")
+    public ResponseEntity<List<Person_AddressDTO>> findAllPerson_Address(
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "0", required = false) int page,
+            @RequestParam(defaultValue = "50", required = false) int size
+    ) {
+        if (search != null && !search.isBlank()) {
+            return ResponseEntity.ok(person_addressService.findBySearch(search, PageRequest.of(page, size)));
+        }
+        return ResponseEntity.ok(person_addressService.findAll(PageRequest.of(page, size)));
+    }
+
     @GetMapping(value = "/person_address/{id}")
     public ResponseEntity<Person_AddressDTO> findPerson_AddressById(@PathVariable Long id) {
         return ResponseEntity.of(
                 person_addressService.findById(id)
         );
     }
+
     @Transactional
     @DeleteMapping(value = "/person_address/{id}")
     public ResponseEntity<Void> deletePerson_Address(@PathVariable Long id) {

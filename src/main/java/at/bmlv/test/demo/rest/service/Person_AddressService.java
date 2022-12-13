@@ -1,14 +1,23 @@
 package at.bmlv.test.demo.rest.service;
 
+import at.bmlv.test.demo.domain.Address;
+import at.bmlv.test.demo.domain.Person;
+import at.bmlv.test.demo.domain.Person_Address;
 import at.bmlv.test.demo.dto.Person_AddressDTO;
 import at.bmlv.test.demo.mapper.Person_AddressMapper;
+import at.bmlv.test.demo.repository.AddressRepository;
+import at.bmlv.test.demo.repository.PersonRepository;
 import at.bmlv.test.demo.repository.Person_AddressRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class Person_AddressService {
@@ -16,13 +25,31 @@ public class Person_AddressService {
     private final Person_AddressRepository person_addressRepository;
     private final Person_AddressMapper person_addressMapper;
 
-    public Person_AddressService(Person_AddressRepository personAddressRepository, Person_AddressMapper personAddressMapper) {
+    private final PersonRepository personRepository;
+
+    private final AddressRepository addressRepository;
+
+    public Person_AddressService(Person_AddressRepository personAddressRepository, Person_AddressMapper personAddressMapper, PersonRepository personRepository, AddressRepository addressRepository) {
         this.person_addressRepository = personAddressRepository;
         this.person_addressMapper = personAddressMapper;
+        this.personRepository = personRepository;
+        this.addressRepository = addressRepository;
     }
+
     @Transactional
-    public Person_AddressDTO create(Person_AddressDTO person_addressDTO) {
-        return person_addressMapper.toDTO(person_addressRepository.save(person_addressMapper.toEntity(person_addressDTO)));
+    public Person_AddressDTO create(Long id, UUID uuid) {
+        Optional<Person> person = personRepository.findById(uuid);
+        Optional<Address> address = addressRepository.findById(id);
+
+        if (person.isEmpty() || address.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        Person_Address person_address = new Person_Address();
+        person_address.setPerson(person.get());
+        person_address.setAddress(address.get());
+
+        return person_addressMapper.toDTO(person_addressRepository.save(person_address));
     }
 
     //Updated not needed?

@@ -29,7 +29,7 @@ public class Place {
     @Column(name = "postleitzahl", nullable = false)
     private Integer postcode;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER , cascade = CascadeType.MERGE)
     private Country country;
 
     @Override
