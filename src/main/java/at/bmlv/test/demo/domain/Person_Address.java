@@ -14,7 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "person_address")
-@Table(name = "person_address")
+@Table(name = "person_address", uniqueConstraints = @UniqueConstraint(name = "UniquePersonAndAddress", columnNames = {"PERSON_ID", "ADDRESS_ID"}))
 public class Person_Address {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_address_gen")

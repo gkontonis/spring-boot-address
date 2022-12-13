@@ -415,5 +415,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "17d53249-4ab0-4ff3-8895-a7d8855663f0",
+    "colId": "2a949526-cc68-472b-b2e5-064d2d8c3ee9",
+    "containerId": "3486d75b-a6af-4108-b273-763e0e902bd8",
+    "name": "localhost:8080/api/v1/person addperson",
+    "url": "localhost:8080/api/v1/person",
+    "method": "POST",
+    "sortNum": 12500,
+    "created": "2022-12-13T09:10:09.265Z",
+    "modified": "2022-12-13T09:11:39.375Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"firstName\": \"Maggie\",\n  \"lastName\": \"Simpson\",\n  \"gender\": \"W\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
