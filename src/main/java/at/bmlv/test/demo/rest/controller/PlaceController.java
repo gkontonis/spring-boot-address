@@ -20,6 +20,7 @@ public class PlaceController {
     public PlaceController(PlaceService placeService) {
         this.placeService = placeService;
     }
+
     @Transactional
     @PostMapping(value = "/place")
     public ResponseEntity<PlaceDTO> createPlace(@RequestBody PlaceDTO placeDTO) throws URISyntaxException {
@@ -34,11 +35,7 @@ public class PlaceController {
     }
 
     @GetMapping(value = "/place")
-    public ResponseEntity<List<PlaceDTO>> findAllPlaces(
-            @RequestParam(required = false) String search,
-            @RequestParam(defaultValue = "0", required = false) int page,
-            @RequestParam(defaultValue = "50", required = false) int size
-    ) {
+    public ResponseEntity<List<PlaceDTO>> findAllPlaces(@RequestParam(required = false) String search, @RequestParam(defaultValue = "0", required = false) int page, @RequestParam(defaultValue = "50", required = false) int size) {
         if (search != null && !search.isBlank()) {
             return ResponseEntity.ok(placeService.findBySearch(search, PageRequest.of(page, size)));
         }
@@ -48,10 +45,9 @@ public class PlaceController {
 
     @GetMapping(value = "/place/{id}")
     public ResponseEntity<PlaceDTO> findPlaceById(@PathVariable Long id) {
-        return ResponseEntity.of(
-                placeService.findById(id)
-        );
+        return ResponseEntity.of(placeService.findById(id));
     }
+
     @Transactional
     @DeleteMapping(value = "/place/{id}")
     public ResponseEntity<Void> deletePlace(@PathVariable Long id) {

@@ -1,7 +1,6 @@
 package at.bmlv.test.demo.rest.service;
 
 import at.bmlv.test.demo.domain.Person;
-import at.bmlv.test.demo.dto.CountryDTO;
 import at.bmlv.test.demo.dto.PersonDTO;
 import at.bmlv.test.demo.mapper.PersonMapper;
 import at.bmlv.test.demo.repository.PersonRepository;
@@ -31,12 +30,7 @@ public class PersonService {
     @Transactional
     public void update(PersonDTO personDTO) {
         Person person = personMapper.toEntity(personDTO);
-        personRepository.update(
-                person.getFirstName(),
-                person.getLastName(),
-                person.getGender(),
-                person.getUuid()
-        );
+        personRepository.update(person.getFirstName(), person.getLastName(), person.getGender(), person.getUuid());
     }
 
     public List<PersonDTO> findAll(Pageable page) {

@@ -1,7 +1,7 @@
 package at.bmlv.test.demo.rest.controller;
 
-import at.bmlv.test.demo.dto.Person_AddressDTO;
 import at.bmlv.test.demo.dto.IdDTO;
+import at.bmlv.test.demo.dto.Person_AddressDTO;
 import at.bmlv.test.demo.rest.service.Person_AddressService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-@Tag(name= "person-address-controller")
+@Tag(name = "person-address-controller")
 public class Person_AddressController {
 
     private static final String ENDPOINT = "/person_address";
@@ -40,11 +40,7 @@ public class Person_AddressController {
 
      not needed?*/
     @GetMapping(value = "/person_address")
-    public ResponseEntity<List<Person_AddressDTO>> findAllPerson_Address(
-            @RequestParam(required = false) String search,
-            @RequestParam(defaultValue = "0", required = false) int page,
-            @RequestParam(defaultValue = "50", required = false) int size
-    ) {
+    public ResponseEntity<List<Person_AddressDTO>> findAllPerson_Address(@RequestParam(required = false) String search, @RequestParam(defaultValue = "0", required = false) int page, @RequestParam(defaultValue = "50", required = false) int size) {
         if (search != null && !search.isBlank()) {
             return ResponseEntity.ok(person_addressService.findBySearch(search, PageRequest.of(page, size)));
         }
@@ -53,9 +49,7 @@ public class Person_AddressController {
 
     @GetMapping(value = "/person_address/{id}")
     public ResponseEntity<Person_AddressDTO> findPerson_AddressById(@PathVariable Long id) {
-        return ResponseEntity.of(
-                person_addressService.findById(id)
-        );
+        return ResponseEntity.of(person_addressService.findById(id));
     }
 
     @Transactional

@@ -1,6 +1,5 @@
 package at.bmlv.test.demo.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -14,11 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CountryDTO {
     private Long id;
-    @NotEmpty( message = "Land darf nicht leer sein" )
-    @Size( max = 255 )
+    @NotEmpty(message = "Land darf nicht leer sein")
+    @Size(max = 255)
     private String countryName;
-    @NotEmpty( message = "Land-Abkuerzung darf nicht leer sein" )
-    @Size( max = 255 )
+    @NotEmpty(message = "Land-Abkuerzung darf nicht leer sein")
+    @Size(max = 255)
     private String countryNameAbbreviation;
 
 }

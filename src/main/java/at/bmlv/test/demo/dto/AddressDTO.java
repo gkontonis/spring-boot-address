@@ -1,6 +1,5 @@
 package at.bmlv.test.demo.dto;
 
-import at.bmlv.test.demo.domain.Person_Address;
 import at.bmlv.test.demo.domain.Place;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -19,7 +18,8 @@ public class AddressDTO {
 
     //nur zum test
     private Long id;
-    @NotEmpty(message = "Strassenname darf nicht leer sein") @Size(max = 255, message = "Street name must contain 1-255 character")
+    @NotEmpty(message = "Strassenname darf nicht leer sein")
+    @Size(max = 255, message = "Street name must contain 1-255 character")
     private String streetName;
     @NotEmpty(message = "Hausnummer darf nicht leer sein")
     @Size(max = 255)

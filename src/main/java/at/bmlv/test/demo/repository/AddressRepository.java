@@ -1,8 +1,6 @@
 package at.bmlv.test.demo.repository;
 
 import at.bmlv.test.demo.domain.Address;
-import at.bmlv.test.demo.domain.Country;
-import at.bmlv.test.demo.domain.Person_Address;
 import at.bmlv.test.demo.domain.Place;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,9 +22,5 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
 
     @Modifying
     @Query("update address a set a.streetName = :streetName, a.houseNumber =:houseNumber, a.flatNumber=:flatNumber, a.place=:place where a.id= :id")
-    void update(@Param("streetName") String streetName,
-                @Param("houseNumber") Integer houseNumber,
-                @Param("flatNumber") Integer flatNumber,
-                @Param("place") Place place,
-                @Param("id") Long id);
+    void update(@Param("streetName") String streetName, @Param("houseNumber") Integer houseNumber, @Param("flatNumber") Integer flatNumber, @Param("place") Place place, @Param("id") Long id);
 }

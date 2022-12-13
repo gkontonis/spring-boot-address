@@ -22,17 +22,16 @@ public class CountryService {
         this.countryRepository = countryRepository;
         this.countryMapper = countryMapper;
     }
+
     @Transactional
     public CountryDTO create(CountryDTO countryDTO) {
         return countryMapper.toDTO(countryRepository.save(countryMapper.toEntity(countryDTO)));
     }
+
     @Transactional
     public void update(CountryDTO countryDTO) {
         Country country = countryMapper.toEntity(countryDTO);
-        countryRepository.update(
-                country.getCountryName(),
-                country.getCountryNameAbbreviation(),
-                country.getId());
+        countryRepository.update(country.getCountryName(), country.getCountryNameAbbreviation(), country.getId());
     }
 
     public List<CountryDTO> findAll(Pageable page) {
@@ -46,6 +45,7 @@ public class CountryService {
     public List<CountryDTO> findBySearch(String search, Pageable page) {
         return countryRepository.findBySearch(search, page).stream().map(countryMapper::toDTO).toList();
     }
+
     @Transactional
     public void deleteCountryByID(Long id) {
         countryRepository.deleteById(id);

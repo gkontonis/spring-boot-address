@@ -10,16 +10,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface PlaceRepository extends JpaRepository<Place, Long> {
-    @Query("select p from place p " +
-            "where lower(p.placeName) like lower(concat('%', :search,'%')) " +
-            "or lower(p.state) like lower(concat('%', :search,'%')) " +
-            "or str(p.postcode) like lower(concat('%', :search,'%')) "
-    )
+    @Query("select p from place p " + "where lower(p.placeName) like lower(concat('%', :search,'%')) " + "or lower(p.state) like lower(concat('%', :search,'%')) " + "or str(p.postcode) like lower(concat('%', :search,'%')) ")
     List<Place> findBySearch(@Param("search") String search, Pageable page);
 
     @Modifying
     @Query("update place p set p.placeName = :placeName, p.state =:state, p.postcode = :postcode, p.country = :country where p.id= :id")
-    void update(@Param("placeName") String placeName, @Param("state") String state,@Param("postcode") Integer postcode,@Param("country") Country country, @Param("id") Long id);
+    void update(@Param("placeName") String placeName, @Param("state") String state, @Param("postcode") Integer postcode, @Param("country") Country country, @Param("id") Long id);
 }

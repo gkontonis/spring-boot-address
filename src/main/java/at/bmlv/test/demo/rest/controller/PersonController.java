@@ -21,6 +21,7 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
+
     @Transactional
     @PostMapping(value = "/person")
     public ResponseEntity<PersonDTO> createPerson(@RequestBody PersonDTO personDTO) throws URISyntaxException {
@@ -35,11 +36,7 @@ public class PersonController {
     }
 
     @GetMapping(value = "/person")
-    public ResponseEntity<List<PersonDTO>> findAllPersons(
-            @RequestParam(required = false) String search,
-            @RequestParam(defaultValue = "0", required = false) int page,
-            @RequestParam(defaultValue = "50", required = false) int size
-    ) {
+    public ResponseEntity<List<PersonDTO>> findAllPersons(@RequestParam(required = false) String search, @RequestParam(defaultValue = "0", required = false) int page, @RequestParam(defaultValue = "50", required = false) int size) {
         if (search != null && !search.isBlank()) {
             return ResponseEntity.ok(personService.findBySearch(search, PageRequest.of(page, size)));
         }
@@ -48,10 +45,9 @@ public class PersonController {
 
     @GetMapping(value = "/person/{id}")
     public ResponseEntity<PersonDTO> findPersonById(@PathVariable UUID id) {
-        return ResponseEntity.of(
-                personService.findById(id)
-        );
+        return ResponseEntity.of(personService.findById(id));
     }
+
     @Transactional
     @DeleteMapping(value = "/person/{uuid}")//uuid großklein wichtig?
     public ResponseEntity<Void> deletePerson(@PathVariable UUID uuid) {

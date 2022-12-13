@@ -13,10 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Person_AddressDTO {
     private Long id;
-    @NotEmpty( message = "Person darf nicht leer sein" )
-    @Size( max = 255 )
+    @NotEmpty(message = "Person darf nicht leer sein")
+    @Size(max = 255)
     private PersonDTO person;
-    @NotEmpty( message = "Addresse darf nicht leer sein" )
-    @Size( max = 255 )
+    @NotEmpty(message = "Addresse darf nicht leer sein")
+    @Size(max = 255)
     private AddressDTO address;
 }

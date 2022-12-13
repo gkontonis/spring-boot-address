@@ -79,7 +79,6 @@ public class Person_AddressMapper implements EntityMapper<Person_AddressDTO, Per
         return person_addressList;
     }
 
-
     public List<Person_AddressDTO> toDTOWithPersonList(List<Person_Address> entities) {
         if (entities == null) {
             return List.of();
