@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class CountryController {
         this.countryService = countryService;
     }
 
-    @Transactional
+
     @PostMapping(value = "/country")
     @Operation(summary = "Create country", responses = {
             @ApiResponse(description = "Success", responseCode = "200",
@@ -36,7 +35,7 @@ public class CountryController {
         return ResponseEntity.created(new URI(ENDPOINT)).body(countryService.create(countryDTO));
     }
 
-    @Transactional
+
     @PutMapping(value = "/country/{id}")
     @Operation(summary = "Update country", responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = @Content),
@@ -70,7 +69,6 @@ public class CountryController {
         return ResponseEntity.of(countryService.findById(id));
     }
 
-    @Transactional
     @DeleteMapping(value = "/country/{id}")
     @Operation(summary = "Delete country by id", responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = @Content),

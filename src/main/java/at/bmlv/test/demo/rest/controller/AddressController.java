@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,14 +25,14 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @Transactional
+
     @PostMapping(value = "/address")
     @Operation(summary = "Create address", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AddressDTO.class))), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
     public ResponseEntity<AddressDTO> createAddress(@RequestBody AddressDTO addressDTO) throws URISyntaxException {
         return ResponseEntity.created(new URI(ENDPOINT)).body(addressService.create(addressDTO));
     }
 
-    @Transactional
+
     @PutMapping(value = "/address/{id}")
     @Operation(summary = "Update address", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
     public ResponseEntity<Void> updateAddress(@PathVariable Long id, @RequestBody AddressDTO addressDTO) {
@@ -57,7 +56,7 @@ public class AddressController {
         return ResponseEntity.of(addressService.findById(id));
     }
 
-    @Transactional
+
     @DeleteMapping(value = "/address/{id}")
     @Operation(summary = "Delete address by id", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content), @ApiResponse(description = "Not found", responseCode = "404", content = @Content), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id) {

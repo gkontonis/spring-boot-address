@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class Person_AddressController {
         person_addressService = personAddressService;
     }
 
-    @Transactional
+
     @PostMapping(value = "/person_address")
     @Operation(summary = "Create person_address", responses = {
             @ApiResponse(description = "Success", responseCode = "200",
@@ -39,14 +38,14 @@ public class Person_AddressController {
         return ResponseEntity.created(new URI(ENDPOINT)).body(person_addressService.create(id.getId(), id.getUuid()));
     }
 
-    /* @Transactional
+    /*
      @PutMapping(value = "/person_address/{id}")
      public ResponseEntity<Void> updateperson_address(@PathVariable Long id, @RequestBody Person_AddressDTO person_addressDTO) {
          person_addressService.update(person_addressDTO);
          return ResponseEntity.ok().build();
      }
-
      not needed?*/
+
     @GetMapping(value = "/person_address")
     @Operation(summary = "Get all persons", responses = {
             @ApiResponse(description = "Success", responseCode = "200",
@@ -70,7 +69,7 @@ public class Person_AddressController {
         return ResponseEntity.of(person_addressService.findById(id));
     }
 
-    @Transactional
+
     @DeleteMapping(value = "/person_address/{id}")
     @Operation(summary = "Delete person_address by id", responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = @Content),
