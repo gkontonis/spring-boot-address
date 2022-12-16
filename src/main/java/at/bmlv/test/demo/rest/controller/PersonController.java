@@ -1,6 +1,7 @@
 package at.bmlv.test.demo.rest.controller;
 
 import at.bmlv.test.demo.dto.PersonDTO;
+import at.bmlv.test.demo.rest.exception.PersonNotFoundException;
 import at.bmlv.test.demo.rest.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -34,7 +35,7 @@ public class PersonController {
 
 
     @PutMapping(value = "/person/{UUID}")
-    @Operation(summary = "Update country", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
+    @Operation(summary = "Update person", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
     public ResponseEntity<Void> updatePerson(@PathVariable UUID UUID, @RequestBody PersonDTO personDTO) {
         personService.update(personDTO);
         return ResponseEntity.ok().build();
@@ -42,9 +43,7 @@ public class PersonController {
 
     @GetMapping(value = "/person")
     @Operation(summary = "Get all persons", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDTO.class))), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
-    public ResponseEntity<List<PersonDTO>> findAllPersons(@RequestParam(required = false) String search, @RequestParam(defaultValue = "0", required = false) int page, @RequestParam(defaultValue = "50", required = false) int size) {
-
-
+    public ResponseEntity<List<PersonDTO>> findAllPersons(@RequestParam(required = false) String search, @RequestParam(defaultValue = "0", required = false) int page, @RequestParam(defaultValue = "50", required = false) int size) throws PersonNotFoundException {
         if (search != null && !search.isBlank()) {
             return ResponseEntity.ok(personService.findBySearch(search, PageRequest.of(page, size)));
         }
