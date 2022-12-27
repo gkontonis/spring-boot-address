@@ -31,7 +31,7 @@ public class Address {
     @Column(name = "tuernummer", nullable = false)
     private Integer flatNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private Place place;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "address", orphanRemoval = true)
     private List<Person_Address> person_addressList;
