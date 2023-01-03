@@ -3,6 +3,7 @@ package at.bmlv.test.demo.rest.controller;
 import at.bmlv.test.demo.dto.AddressDTO;
 import at.bmlv.test.demo.rest.service.AddressService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,8 +41,12 @@ public class AddressController {
         return ResponseEntity.ok().build();
     }
 
+
+    //TODO Arrayy sceme by everyting with an array
     @GetMapping(value = "/address")
-    @Operation(summary = "Get all addresses", responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AddressDTO.class))), @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
+    @Operation(summary = "Get all addresses", responses = {@ApiResponse(description = "Success", responseCode = "200",
+            content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = AddressDTO.class)))),
+            @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
     public ResponseEntity<List<AddressDTO>> findAllAddresses(@RequestParam(required = false) String search, @RequestParam(defaultValue = "0", required = false) int page, @RequestParam(defaultValue = "50", required = false) int size) {
         if (search != null && !search.isBlank()) {
             return ResponseEntity.ok(addressService.findBySearch(search, PageRequest.of(page, size)));

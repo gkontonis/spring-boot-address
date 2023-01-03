@@ -34,10 +34,9 @@ public class Person_AddressController {
             @ApiResponse(description = "Success", responseCode = "200",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = Person_AddressDTO.class))),
             @ApiResponse(description = "Authentication Failure", responseCode = "401", content = @Content)})
-    public ResponseEntity<Person_AddressDTO> createPerson_Address(@RequestBody IdDTO id) throws URISyntaxException {
-        return ResponseEntity.created(new URI(ENDPOINT)).body(person_addressService.create(id.getId(), id.getUuid()));
+    public ResponseEntity<Person_AddressDTO> createPerson_Address(@RequestBody Person_AddressDTO dto) throws URISyntaxException {
+        return ResponseEntity.created(new URI(ENDPOINT)).body(person_addressService.create(dto));
     }
-
     /*
      @PutMapping(value = "/person_address/{id}")
      public ResponseEntity<Void> updateperson_address(@PathVariable Long id, @RequestBody Person_AddressDTO person_addressDTO) {

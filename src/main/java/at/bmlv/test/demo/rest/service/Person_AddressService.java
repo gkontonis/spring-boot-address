@@ -35,9 +35,9 @@ public class Person_AddressService {
     }
 
     @Transactional
-    public Person_AddressDTO create(Long id, UUID uuid) {
-        Optional<Person> person = personRepository.findById(uuid);
-        Optional<Address> address = addressRepository.findById(id);
+    public Person_AddressDTO create(Person_AddressDTO dto) {
+        Optional<Person> person = personRepository.findById(dto.getPerson().getUuid());
+        Optional<Address> address = addressRepository.findById(dto.getAddress().getId());
 
         if (person.isEmpty() || address.isEmpty()) {
             throw new EntityNotFoundException();
