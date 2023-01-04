@@ -1,0 +1,45 @@
+[
+  {
+    "_id": "2a949526-cc68-472b-b2e5-064d2d8c3ee9",
+    "colName": "test-be",
+    "created": "2022-12-09T08:09:14.627Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "3486d75b-a6af-4108-b273-763e0e902bd8",
+        "name": "person",
+        "containerId": "",
+        "created": "2022-12-09T08:11:02.588Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "7345ab65-f50e-49a7-8492-3ed770422c4b",
+        "name": "address",
+        "containerId": "",
+        "created": "2022-12-09T08:53:37.196Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "9a2bbbef-abfc-45e9-be8a-425edb10bbd6",
+        "name": "country",
+        "containerId": "",
+        "created": "2022-12-09T09:23:59.129Z",
+        "sortNum": 30000
+      },
+      {
+        "_id": "bc254c8b-9eb9-4914-99ab-c5de095a475d",
+        "name": "place",
+        "containerId": "",
+        "created": "2022-12-09T09:58:20.920Z",
+        "sortNum": 40000
+      },
+      {
+        "_id": "461226c4-9c07-4814-92b7-f77e718b4fdb",
+        "name": "person_address",
+        "containerId": "",
+        "created": "2022-12-09T10:27:41.847Z",
+        "sortNum": 50000
+      }
+    ]
+  }
+]
